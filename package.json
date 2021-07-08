@@ -11,10 +11,12 @@
     "area-data": "^5.0.6",
     "core-js": "^3.6.5",
     "echarts": "^4.9.0",
+    "element-ui": "^2.15.3",
     "v-charts": "^1.19.0",
     "v-distpicker": "^1.2.10",
     "vue": "^2.6.11",
-    "vue-area-linkage": "^5.1.0"
+    "vue-area-linkage": "^5.1.0",
+    "vue-router": "^3.5.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

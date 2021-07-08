@@ -5,25 +5,28 @@
     <!-- <debounce :list='list' :msg.sync="msg"></debounce> -->
     <!-- <hr> -->
     <!-- <span>{{list}} --- {{msg}}</span> -->
-    <v-chart></v-chart>
+    <!-- <v-chart></v-chart> -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-import vChart from './components/v-chart.vue'
+// import vChart from './components/v-chart.vue'
 // import debounce from './components/debounce'
+// import iotBar from './components/iot-bar'
 export default {
   name: 'App',
   components: {
     // HelloWorld,
-    vChart
+    // vChart
     // debounce,
+    // iotBar
   },
   data() {
       return {
           list:[1,2,3,4],
-          msg:'yang'
+          msg:'yang',
       }
   },
 }
@@ -36,6 +39,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /* margin-top: 60px; */
+  /* width: 100%;
+  height: 100%; */
+  height: 100%;
+}
+body,html{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+*{
+    box-sizing: border-box;
 }
 </style>
