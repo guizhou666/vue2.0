@@ -4,7 +4,7 @@ Vue.use(Router)
 
 export const RouterEcharts = [{
         path: '/',
-        component: () => import("@/components/HelloWorld.vue")
+        component: () => import("@/view/map")
     },
     {
         path:'/bar',
@@ -17,6 +17,22 @@ export const RouterEcharts = [{
     {
         path:'/line',
         component:() => import("@/view/line")
+    },
+    {
+        path:'/selected',
+        component:() => import("@/view/selected")
+    },
+    {
+        path:'/map',
+        component:() => import("@/view/map")
+    },
+    {
+        path:'/huan',
+        component:() => import("@/view/huan")
+    },
+    {
+        path:'/dialog',
+        component: () => import("@/view/dialog")
     },
 
 ]

@@ -1,0 +1,75 @@
+// @--primary-color: #1f77d0; // 主色
+@--primary-color: #3891ff; // 主色
+// @--primary-border-color: #dee1e1; // 主边框颜色
+@--primary-border-color: #05acee; // 主边框颜色
+@--primary-border-radius: 4px; // 主圆角
+
+
+@--warning-text-color: #E6A23C; // 预警
+@--danger-text-color: #F56C6C; // 警告
+@--serious-danger-text-color: red; // 警告
+
+@--form-background-color: white; // 输入框/选择框 填充色
+@--form-border-color: #e9ecf1; // 输入框/选择框描 边色
+@--form-placeholder: #e9ecf1; // 输入框内提示 颜色
+@--form-required-text-color: red; // 验证未通过 颜色
+@--form-valida-text-color: @--danger-text-color; // 验证未通过 颜色
+@--form-valida-border-color: @--danger-text-color; // 验证未通过 颜色
+@--form-valida-background-color: @--danger-text-color; // 验证未通过 颜色
+
+@--table-split-strip-color: #fafafa; // 表格分隔条 颜色
+@--table-split-line-color: #ebeef5; // 表格分隔线 颜色
+@--table-text-color: #636363; // 表格内容字段 颜色
+@--table-text-font-size: 14px; // 表格内容字 体大小
+
+@--page-background-color: #f3f4f6; // 页面背景 颜色
+
+// @--text-primary-color: #434343; // 通用字体 颜色
+@--text-primary-color: #ffffff; // 通用字体 颜色
+
+@--panel-content-width: 1654px; // 面板内容宽度
+@--panel-content-radius: @--primary-border-radius; // 面板 圆角
+
+@--hint-text-font-size: 18px; // 提示文字 - 字体大小
+// @--hint-text-color: #434343; // 提示文字 - 字体颜色
+@--hint-text-color: #ffffff; // 提示文字 - 字体颜色
+
+
+@--title-text-font-size: 16px; // 一级标题 字体大小
+// @--title-text-color: #434343; // 一级标题 字体颜色
+@--title-text-color: #ffffff; // 一级标题 字体颜色
+
+@--second-title-text-font-size: 15px; // 二级标题 字体大小
+@--second-title-text-color: @--title-text-color; // 二级标题 字体颜色
+
+
+// 滚动条样式
+::-webkit-scrollbar {
+    /*滚动条整体样式*/
+    width: 10px;
+    /*高宽分别对应横竖滚动条的尺寸*/
+    height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    /*滚动条里面小方块*/
+    border-radius: 10px;
+    background-color: #56698b;
+    // background-image: -webkit-linear-gradient(
+    //     45deg,
+    //     rgba(255, 255, 255, 0.2) 25%,
+    //     transparent 25%,
+    //     transparent 50%,
+    //     rgba(255, 255, 255, 0.2) 50%,
+    //     rgba(255, 255, 255, 0.2) 75%,
+    //     transparent 75%,
+    //     transparent
+    // );
+}
+
+::-webkit-scrollbar-track {
+    /*滚动条里面轨道*/
+    // box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: #374367;
+    border-radius: 10px;
+}

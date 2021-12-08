@@ -31,7 +31,7 @@
         </el-radio-group>
       </div>
     </div>
-    <div :id="'line' + $data._lineConfig.id" style="min-height: 300px"></div>
+    <div class="canvas-content line" style="min-height: 300px"></div>
   </div>
 </template>
 
@@ -69,9 +69,9 @@ export default {
   methods: {
        initEcharts() {
       var myChart = this.$echarts.init(
-        document.getElementById("line" + this.$data._lineConfig.id)
+        this.$el.querySelector('.line')
       );
-      let resizeDiv = document.getElementById("line" + this.$data._lineConfig.id);
+      let resizeDiv = this.$el.querySelector('.line');
       var option = {
         xAxis: {
           type: "category",
