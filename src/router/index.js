@@ -3,7 +3,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 export const RouterEcharts = [{
-        path: '/',
+        path: '/hslg',
         component: () => import("@/view/map")
     },
     {
@@ -34,6 +34,14 @@ export const RouterEcharts = [{
         path:'/dialog',
         component: () => import("@/view/dialog")
     },
+    {
+        path: '/',
+        component: () => import("@/view/debounce")
+    },
+    {
+        path:'/chinaMap',
+        component: () => import("@/view/chinaMap")
+    }
 
 ]
 
