@@ -1,7 +1,7 @@
 <template>
   <div class="line-content">
     <div class="line-li">
-        <ufast-line :lineConfig="lineConfig"></ufast-line>
+      <ufast-line :lineConfig="lineConfig"></ufast-line>
     </div>
   </div>
 </template>
@@ -16,12 +16,20 @@ export default {
     return {
       lineConfig: {
         id: "1",
-        switchTable:[{id:'1',name:'全部'},{id:'2',name:'火电'},{id:'3',name:'水电'},{id:'4',name:'风电'},{id:'5',name:'太阳能'},{id:'6',name:'核能'},{id:'7',name:'其他'},],
+        switchTable: [
+          { id: "1", name: "全部" },
+          { id: "2", name: "火电" },
+          { id: "3", name: "水电" },
+          { id: "4", name: "风电" },
+          { id: "5", name: "太阳能" },
+          { id: "6", name: "核能" },
+          { id: "7", name: "其他" },
+        ],
         legend: {
           data: ["邮件营销", "联盟广告", "视频广告", "直接访问", "搜索引擎"],
         },
         xAxis: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
-        color:["#5470c6","#5470c6","#5470c6","#5470c6","#5470c6"],
+        color: ["#5470c6", "#5470c6", "#5470c6", "#5470c6", "#5470c6"],
         series: [
           {
             name: "邮件营销",
@@ -65,6 +73,12 @@ export default {
             stack: "总555量",
             data: [820, 932, 905551, 934, 1290, 1330, 1320],
           },
+          {
+            name: "搜索引擎",
+            type: "line",
+            stack: "总量",
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+          },
         ],
       },
     };
@@ -78,10 +92,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-    .line-content{
-        .line-li{
-            width: 40%;
-            margin: 20px;
-        }
-    }
+.line-content {
+  .line-li {
+    width: 40%;
+    margin: 20px;
+  }
+}
 </style>
