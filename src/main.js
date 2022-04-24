@@ -10,6 +10,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import axios from 'axios'
 import router from './router'
 import MyUI from '@components'
+import start from '@/micros'
 // import AMap from 'vue-amap' // 这个引入的最好放在引入的vue上面
 // Vue.use(AMap)
 // AMap.initAMapApiLoader({
@@ -39,3 +40,4 @@ new Vue({
     router,
   render: h => h(App),
 }).$mount('#app')
+start();

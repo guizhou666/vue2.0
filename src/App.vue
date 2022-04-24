@@ -16,7 +16,7 @@
 // import debounce from './components/debounce'
 // import iotBar from './components/iot-bar'
 export default {
-  name: 'App',
+  name: "App",
   components: {
     // HelloWorld,
     // vChart
@@ -24,12 +24,15 @@ export default {
     // iotBar
   },
   data() {
-      return {
-          list:[1,2,3,4],
-          msg:'yang',
-      }
+    return {
+      list: [1, 2, 3, 4],
+      msg: "yang",
+      isCollapse: false,
+    };
   },
-}
+  methods: {
+  },
+};
 </script>
 
 <style>
@@ -44,13 +47,14 @@ export default {
   height: 100%; */
   height: 100%;
 }
-body,html{
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
 }
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
 </style>

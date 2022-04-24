@@ -41,6 +41,18 @@ export const RouterEcharts = [{
     {
         path:'/chinaMap',
         component: () => import("@/view/chinaMap")
+    },
+    {
+        path:'/mixinTest',
+        component: () => import("@/view/mixinTest")
+    },
+    {
+        path:'/test',
+        component: () => import("@/view/test")
+    },
+    {
+        path:'/home',
+        component: () => import("@/view/home")
     }
 
 ]
