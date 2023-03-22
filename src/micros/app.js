@@ -5,10 +5,10 @@
  * @Last Modified time: 2021-09-10 16:04:57 
  */
 const apps = [{
-    name: 'micro-app-plugin',
-    entry: '//localhost:8088',
-    container: '#plugin-container',
-    activeRule: '#/micplugin'
+    name: 'micro-app-order',
+    entry: '//localhost:8081',
+    container: '#order-container',
+    activeRule: '/micorder'
 }]
 
 // 导出的是registerMicroApps的第一个参数，是一个对象数组，其中数组每个字段的作用如下：

@@ -1,0 +1,2 @@
+demo='xxxxxxxx'
+videoUrlList = ['http://192.168.10.120:30811/iot/monitor1.flv', 'http://192.168.10.120:30812/iot/monitor2.flv', 'http://192.168.10.120:30813/iot/monitor3.flv', 'http://192.168.10.120:30814/iot/monitor4.flv', 'http://192.168.10.120:30815/iot/monitor5.flv', 'http://192.168.10.120:30816/iot/monitor6.flv']

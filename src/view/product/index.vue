@@ -1,0 +1,19 @@
+<template>
+  <div class="">我是商品页面</div>
+</template>
+
+<script>
+export default {
+  components: {},
+  data() {
+    return {};
+  },
+  computed: {},
+  //监控data中的数据变化
+  watch: {},
+  created() {},
+  mounted() {},
+  methods: {},
+};
+</script>
+<style lang="scss" scoped></style>

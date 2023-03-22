@@ -7,53 +7,120 @@ export const RouterEcharts = [{
         component: () => import("@/view/map")
     },
     {
-        path:'/bar',
-        component:() => import("@/view/bar")
+        path: '/bar',
+        component: () => import("@/view/bar")
     },
     {
-        path:'/pie',
-        component:() => import("@/view/pie")
+        path: '/pie',
+        component: () => import("@/view/pie")
     },
     {
-        path:'/line',
-        component:() => import("@/view/line")
+        path: '/line',
+        component: () => import("@/view/line")
     },
     {
-        path:'/selected',
-        component:() => import("@/view/selected")
+        path: '/selected',
+        component: () => import("@/view/selected")
     },
     {
-        path:'/map',
-        component:() => import("@/view/map")
+        path: '/map',
+        component: () => import("@/view/map")
     },
     {
-        path:'/huan',
-        component:() => import("@/view/huan")
+        path: '/huan',
+        component: () => import("@/view/huan")
     },
     {
-        path:'/dialog',
+        path: '/dialog',
         component: () => import("@/view/dialog")
     },
     {
         path: '/',
-        component: () => import("@/view/debounce")
+        component: () => import("@/view/home"),
+        children: [{
+                path: "product",
+                component: () => import('@/view/product')
+            },
+            {
+                path: "shopping",
+                component: () => import('@/view/shopping')
+            },
+        ]
     },
     {
-        path:'/chinaMap',
+        path: '/chinaMap',
         component: () => import("@/view/chinaMap")
     },
     {
-        path:'/mixinTest',
+        path: '/mixinTest',
         component: () => import("@/view/mixinTest")
     },
     {
-        path:'/test',
+        path: '/test',
         component: () => import("@/view/test")
     },
     {
-        path:'/home',
-        component: () => import("@/view/home")
+        path: '/test2.0',
+        component: () => import("@/view/test2.0")
+    },
+    {
+        path: '/test3.0',
+        component: () => import("@/view/test3.0")
+    },
+    {
+        path: '/test4.0',
+        component: () => import("@/view/test4.0")
+    },
+    {
+        path: '/pdfView',
+        component: () => import("@/view/pdfView")
+    },
+    {
+        path: '/npmb',
+        component: () => import("@/view/npmb")
+    },
+    {
+        path: '/flvDemo',
+        component: () => import("@/view/flvDemo")
+    },
+    {
+        path: '/flvDemo2',
+        component: () => import("@/view/flvDemo2")
+    },
+    {
+        path: '/test5',
+        component: () => import("@/view/test5")
+    },
+    {
+        path: '/offlineMpa',
+        component: () => import("@/view/offlineMpa")
+    },
+    {
+        path: '/keep-alive',
+        component: () => import("@/view/keepAlive"),
+        redirect: '/keep-alive/table',
+        children: [{
+                path: 'table',
+                component: () => import("@/view/keepAlive/table.vue"),
+            },
+            {
+                path: 'detail',
+                component: () => import("@/view/keepAlive/detail.vue"),
+                children:[{
+                    path:'mast-detail',
+                    component:() => import("@/view/keepAlive/mast-detail.vue"),
+                }]
+            },
+        ]
     }
+    // {
+    //     path: '/product',
+    //     component: () => import("@/view/product")
+    // },
+    // {
+    //     path:'/home',
+    //     component: () => import("@/view/home")
+    // }
 
 ]
 

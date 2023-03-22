@@ -1,20 +1,17 @@
 <template>
-  <div class="">
-    <h1>哈哈哈{{ people.children.name }}</h1>
-    <button @click="changeName">按钮</button>
+  <div class="box">
+    dsjlkgl
+    <txt :lists="lists" name="yang"></txt>
   </div>
 </template>
 
 <script>
+import txt from "@/components/txt";
 export default {
-  components: {},
+  components: { txt },
   data() {
     return {
-      people: {
-        children: {
-          name: "张三",
-        },
-      },
+      lists: ["连雨不知春去", "一晴方觉夏深",'lkjsdddddddddddddddddddddddd','jsdlgjlsdjgksdjglsdkjglsdjgls','sjdlgklsdgjlskgsss'],
     };
   },
   computed: {},
@@ -22,11 +19,11 @@ export default {
   watch: {},
   created() {},
   mounted() {},
-  methods: {
-    changeName() {
-      this.people.children.name = "李四";
-    },
-  },
+  methods: {},
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.box {
+  width: 100%;
+}
+</style>

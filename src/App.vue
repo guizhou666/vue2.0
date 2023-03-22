@@ -6,7 +6,9 @@
     <!-- <hr> -->
     <!-- <span>{{list}} --- {{msg}}</span> -->
     <!-- <v-chart></v-chart> -->
-    <router-view></router-view>
+     <router-view></router-view>
+     <!-- 新添加，微应用的容器 -->
+  <!-- <div id="order-container"></div> -->
   </div>
 </template>
 

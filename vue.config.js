@@ -4,6 +4,7 @@ function resolve(dir) {
     return path.join(__dirname, dir);
 }
 module.exports = {
+    publicPath: './',
     productionSourceMap: false,
     lintOnSave: true,
      devServer: {
@@ -55,6 +56,7 @@ module.exports = {
         config.resolve.alias
             .set('@', resolve('src'))
             .set('@components', resolve('src/components'))
+            .set('@/packages', resolve('src/packges'))
         // 这里只写了部分，可以自己再添加，按这种格式 .set('', resolve(''))
     },
      configureWebpack(config) {
