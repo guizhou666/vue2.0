@@ -13,8 +13,9 @@ import MyUI from '@components'
 import Vant from 'vant';
 import 'vant/lib/index.css';
 import store from './store/index'
+import VueCompositionApi from '@vue/composition-api'
 Vue.use(Vant);
-
+Vue.use(VueCompositionApi)
 
 Vue.component('v-distpicker', Distpicker);
 Vue.use(VCharts);

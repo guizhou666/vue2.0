@@ -79,14 +79,14 @@ export const RouterEcharts = [{
         path: '/npmb',
         component: () => import("@/view/npmb")
     },
-    {
-        path: '/flvDemo',
-        component: () => import("@/view/flvDemo")
-    },
-    {
-        path: '/flvDemo2',
-        component: () => import("@/view/flvDemo2")
-    },
+    // {
+    //     path: '/flvDemo',
+    //     component: () => import("@/view/flvDemo")
+    // },
+    // {
+    //     path: '/flvDemo2',
+    //     component: () => import("@/view/flvDemo2")
+    // },
     {
         path: '/test5',
         component: () => import("@/view/test5")
@@ -112,7 +112,39 @@ export const RouterEcharts = [{
                 }]
             },
         ]
-    }
+    },
+    {
+        path: '/snake',
+        component: () => import("@/view/snake"),
+    },
+    {
+        path: '/autoRpx',
+        component: () => import("@/view/autoRpx"),
+    },
+    {
+        path: '/testTag',
+        component: () => import("@/view/testTag"),
+    },
+    {
+        path: '/vueTreeselect',
+        component: () => import("@/view/vueTreeselect"),
+    },
+    {
+        path: '/flowPicture',
+        component: () => import("@/view/flowPicture"),
+    },
+    {
+        path: '/vue3',
+        component: () => import("@/view/vue3"),
+    },
+    {
+        path: '/pagination',
+        component: () => import("@/view/pagination"),
+    },
+    {
+        path: '/oldemo',
+        component: () => import("@/view/olDemo"),
+    },
     // {
     //     path: '/product',
     //     component: () => import("@/view/product")

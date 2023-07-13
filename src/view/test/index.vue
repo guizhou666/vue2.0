@@ -1,29 +1,93 @@
 <template>
-  <div class="box">
-    dsjlkgl
-    <txt :lists="lists" name="yang"></txt>
+  <div class="custom-select">
+    <div class="select-container" @click="toggleDropdown">
+      <div class="selected-value">{{ selectedValue }}</div>
+      <div class="dropdown-icon">
+        <span v-if="isOpen">&#x25B2;</span>
+        <span v-else>&#x25BC;</span>
+      </div>
+    </div>
+    <ul v-show="isOpen" class="dropdown-list">
+      <li v-for="option in options" :key="option.value" @click="handleOptionClick(option.value)">
+        {{ option.label }}
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import txt from "@/components/txt";
 export default {
-  components: { txt },
+  name: 'CustomSelect',
+  props: {
+    value: {
+      type: [String, Number],
+      required: true,
+    },
+    options: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
-      lists: ["连雨不知春去", "一晴方觉夏深",'lkjsdddddddddddddddddddddddd','jsdlgjlsdjgksdjglsdkjglsdjgls','sjdlgklsdgjlskgsss'],
+      isOpen: false,
+      selectedValue: this.value,
     };
   },
-  computed: {},
-  //监控data中的数据变化
-  watch: {},
-  created() {},
-  mounted() {},
-  methods: {},
+  methods: {
+    toggleDropdown() {
+      this.isOpen = !this.isOpen;
+    },
+    handleOptionClick(value) {
+      this.selectedValue = value;
+      this.isOpen = false;
+      this.$emit('input', value);
+    },
+  },
 };
 </script>
-<style lang="scss" scoped>
-.box {
+
+<style scoped>
+.custom-select {
+  position: relative;
+  display: inline-block;
+}
+
+.select-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.selected-value {
+  flex: 1;
+}
+
+.dropdown-icon {
+  margin-left: 5px;
+}
+
+.dropdown-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ccc;
+  position: absolute;
+  top: 100%;
+  left: 0;
   width: 100%;
+  background-color: #fff;
+  display: none;
+}
+
+.dropdown-list li {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.dropdown-list li:hover {
+  background-color: #f5f5f5;
 }
 </style>
