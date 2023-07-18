@@ -145,6 +145,14 @@ export const RouterEcharts = [{
         path: '/oldemo',
         component: () => import("@/view/olDemo"),
     },
+    {
+        path: '/canvas',
+        component: () => import("@/view/canvas"),
+    },
+    {
+        path: '/fullScreen',
+        component: () => import("@/view/fullScreen"),
+    },
     // {
     //     path: '/product',
     //     component: () => import("@/view/product")

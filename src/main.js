@@ -16,7 +16,10 @@ import store from './store/index'
 import VueCompositionApi from '@vue/composition-api'
 Vue.use(Vant);
 Vue.use(VueCompositionApi)
+// 将自动注册所有组件为全局组件
+import dataV from '@jiaminghi/data-view'
 
+Vue.use(dataV)
 Vue.component('v-distpicker', Distpicker);
 Vue.use(VCharts);
 Vue.use(ElementUI, {

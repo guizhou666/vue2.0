@@ -11,6 +11,7 @@
     "@bpmn-io/add-exporter": "^0.2.0",
     "@bpmn-io/element-template-chooser": "^0.0.5",
     "@bpmn-io/properties-panel": "^0.20.3",
+    "@jiaminghi/data-view": "^2.10.0",
     "@riophae/vue-treeselect": "^0.4.0",
     "@vue/composition-api": "^1.7.1",
     "area-data": "^5.0.6",
@@ -31,6 +32,7 @@
     "lodash.debounce": "^4.0.8",
     "lucide-vue": "^0.89.0",
     "min-dash": "^3.5.2",
+    "ol": "^7.4.0",
     "qiankun": "^2.7.0",
     "v-charts": "^1.19.0",
     "v-distpicker": "^1.2.10",
@@ -41,9 +43,8 @@
     "vue-marquee-ho": "^1.2.1",
     "vue-pdf": "^4.3.0",
     "vue-router": "^3.5.2",
-    "vuex": "3.6.2",
     "vue-template-compiler": "2.6.14",
-    "ol": "^7.4.0"
+    "vuex": "3.6.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

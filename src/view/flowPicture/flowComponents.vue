@@ -8,16 +8,18 @@
       <div class="short-line line"></div>
     </div>
     <div class="centre-content">
-      <div class="centre-item" v-for="(item, index) in treeDataVal" :key="index" :style="{ 'top': top(item, index) }">
+      <div class="centre-item" v-for="(item, index) in newTreeData" :key="index" :style="{ 'top': top(item, index) }">
         <!-- <p>边缘节点名称：{{ item.nodeName }} {{ item.top }}</p> -->
         <img class="icon-img" src="../../assets/images/groupTwo.png" alt="">
         <p>{{ item.nodeName }}</p>
         <div class="left-line line"></div>
         <div class="right-line line"></div>
+        <div class="left-bottom-line line" v-if="index !== newTreeData.length - 1"
+          :style="{ 'height': height(item, index) }"></div>
       </div>
     </div>
     <div class="right-content" ref="rightContent">
-      <div v-for="(item, index) in treeDataVal" :key="index">
+      <div v-for="(item, index) in newTreeData" :key="index">
         <div class="big-content" v-for="(v, index2) in item.childrenList" :key="index2">
           <div class="right-item" @click="clickDevice(index, index2)">
             <span>设备名称:{{ v.deviceName }}</span><br>
@@ -38,7 +40,7 @@ export default {
   components: {},
   data() {
     return {
-      treeDataVal: [],
+      newTreeData: [],
       childrenList: [],
       paddingTop: '',
       timer: null,
@@ -57,39 +59,59 @@ export default {
   //监控data中的数据变化
   watch: {
     treeData(val) {
-      this.treeDataVal = val;
+      this.newTreeData = val;
     }
   },
   created() {
-    this.treeDataVal = this.treeData;
+    this.newTreeData = this.treeData;
   },
   mounted() {
-    this.treeDataVal.forEach(item => {
+    this.newTreeData.forEach(item => {
       this.childrenList.push(...item.childrenList)
     });
     // 如果子节点过少则上下居中
     const flowPictureRef = this.$refs.flowPicture;
     const height = flowPictureRef.offsetHeight;
     const childrenLength = this.childrenList.length;
+    console.log(childrenLength)
     if (height > childrenLength * 100) {
-      this.paddingTop = height / 2 - childrenLength * 100 / 2;
+      console.log(childrenLength)
+      this.paddingTop = Number(height / 2 - childrenLength * 100 / 2);
       this.$refs.rightContent.style.paddingTop = this.paddingTop + 'px';
     }
   },
   methods: {
     top(item, index) {
+      // 首位节点top特殊处理
       if (index == 0) {
-        item.top = item.childrenList.length / 2 * 100 - 40 + this.paddingTop;
-        return item.childrenList.length / 2 * 100 - 40 + this.paddingTop + 'px'
-      } else {
+        if (item.childrenList.length < 4) {
+          this.$set(item, 'top', Number(item.childrenList.length / 2 * 100 - 40 + this.paddingTop));
+          return item.childrenList.length / 2 * 100 - 40 + this.paddingTop + 'px'
+        }// 第三层子数据超过三个父级top固定
+        else {
+          this.$set(item, 'dreamTop', Number(item.childrenList.length / 2 * 100 - 40 + this.paddingTop))
+          this.$set(item, 'top', Number(100 - 40 + this.paddingTop))
+          return 100 - 40 + this.paddingTop + 'px'
+        }
+
+      } else if (index == this.newTreeData.length - 1 && item.childrenList.length > 3) {
+        this.$set(item, 'dreamTop', Number(item.id * 100 + 10 + this.paddingTop))
+        this.$set(item, 'top', Number(this.childrenList.length * 100 - 140))
+        return this.childrenList.length * 100 - 140 + 'px'
+      }// 中间节点top正常
+      else {
         if (item.childrenList.length === 1) {
-          item.top = item.id * 100 + 10 + this.paddingTop;
+          this.$set(item, 'top', Number(item.id * 100 + 10 + this.paddingTop))
           return item.id * 100 + 10 + this.paddingTop + 'px'
         } else {
-          item.top = item.id * 100 + (item.childrenList.length / 2) * 100 - 40 + this.paddingTop;
+          this.$set(item, 'top', Number(item.id * 100 + (item.childrenList.length / 2) * 100 - 40 + this.paddingTop))
           return item.id * 100 + (item.childrenList.length / 2) * 100 - 40 + this.paddingTop + 'px'
         }
       }
+    },
+    height(item, index) {
+      item.height = this.newTreeData[index + 1].top - item.top;
+      return this.newTreeData[index + 1].top - item.top + 'px';
     },
     clickDevice(index, index2) {
       this.showImg = false;
@@ -166,7 +188,7 @@ export default {
   .left-content {
     width: 300px;
     height: 100%;
-    border-right: 2px solid #44aaf0;
+    // border-right: 2px solid #44aaf0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -229,7 +251,16 @@ export default {
         width: 168px;
         position: absolute;
         left: -101px;
-        top: 39px;
+        top: 38px;
+      }
+
+      .left-bottom-line {
+        width: 2px;
+        position: absolute;
+        left: -101px;
+        background-color: #44aaf0;
+        top: 40px;
+        height: 100px;
       }
 
       .right-line {
