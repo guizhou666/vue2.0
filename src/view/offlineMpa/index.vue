@@ -1,89 +1,106 @@
-
 <template>
-    <div class="Hbox" :style="{ width: (Mapwidth - 230) + 'px' }" id="Hbox">
-        <div class="mapBOX" id="GDcontainer">
-        </div>
-    </div>
+  <div class="map-data">
+    <div id="map"></div>
+    <el-dialog
+      title="提示"
+      :visible.sync="dialogVisible"
+      width="30%"
+    >
+      <span>这是一段信息</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
+  </div>
 </template>
 
-
 <script>
-var map;
+import "ol/ol.css";
+import Map from "ol/Map";
+import Feature from "ol/Feature";
+import VectorSource from "ol/source/Vector";
+import { Tile as TileLayer, Vector as VectorLayer } from "ol/layer";
+import View from "ol/View";
+import XYZ from "ol/source/XYZ";
+import Point from "ol/geom/Point";
+import { Fill, Stroke, Icon, Style, Text } from "ol/style";
+import { defaults as defaultControls, ScaleLine } from "ol/control";
 export default {
-    data() {
-        return {
-            Mapwidth: document.documentElement.clientWidth,
-            mapList: [],
-        };
-    },
-    mounted() {
-        this.initAMap()
-        this.init()
-    },
-    created() {
-    },
-    watch: {
-        Mapwidth: (val) => {
-            var newWidth = document.getElementById("Hbox")
-            if (newWidth) {
-                newWidth.style.width = Number(val) + 'px'
-            }
-        },
-    },
-    methods: {
-        initAMap() {
-            // 百度地图API功能
-            map = new BMap.Map("GDcontainer", { minZoom: 0, maxZoom: 13 }); // 创建Map实例（minZoom、maxZoom：设置地图最小、最大缩放级别）
-            map.centerAndZoom(new BMap.Point(107.505583, 26.317692), 10); // 设置中心点
-            //先清除所有内容
-            map.clearOverlays();
-            map.enableScrollWheelZoom();     //开启鼠标滚轮缩放
-        },
-        init() {
-            this.mapList = [
-                { lng: '107.505583', lat: '-26.317692', listType: 1 },
-                { lng: '107.51775', lat: '-26.365743', listType: 1 },
-                { lng: '107.524074', lat: '-26.399921', listType: 1 },
-                { lng: '107.549371', lat: '-26.452722', listType: 4 },
-                { lng: '107.563168', lat: '-26.488426', listType: 5 },
-                { lng: '107.570642', lat: '-26.50705', listType: 4 },
-            ]
-            let newdatas = []
-            this.mapList.forEach((item, index) => {
-                if (item.lat != null) {
-                    //---------------------------------标点开始---------------------------------
-                    let point = new BMap.Point(item.lng, 0 - (item.lat))
-                    let myIcon = new BMap.Icon(`require('../../assets/svg/point.svg')`, new BMap.Size(23, 27));
-                    myIcon.setImageSize(new BMap.Size(23, 28));
-                    let label = new BMap.Label(`添加文本`, {       // 创建文本标注
-                        position: point,                          // 设置标注的地理位置
-                        offset: new BMap.Size(-6, -11)           // 设置标注的偏移量
-                    })
-                    let marker = new BMap.Marker(point, { icon: myIcon })
-                    map.addOverlay(marker)
-                    map.addOverlay(label)
-                    label.setStyle({                              // 设置label的样式
-                        color: '#000',
-                        fontSize: '10px',
-                        border: '0px solid #1E90FF',
-                        background: 'transparent',
-                    })
-                    //---------------------------------标点结束---------------------------------
-                    //---------------------------------连线开始---------------------------------
-                    newdatas.push(new BMap.Point(item.lng, 0 - (item.lat)),)
-                    //---------------------------------连线结束---------------------------------
-                }
-            })
-            var polyline = new BMap.Polyline(newdatas, { strokeColor: "#F59A23", strokeWeight: 2, strokeOpacity: 1 });
-            map.addOverlay(polyline);
+  components: {},
+  data() {
+    return {
+      mapObj: null,
+      mapDom: null,
+      mapPointList: [],
+      pointLayerSource: null,
+      pointLayer: null,
+      layer: null,
+      clusterFeatures: null,
+      pointItem: null,
+      bezierLayer: null,
+      bezierSource: null,
+      bezierFeatures: [],
+      pointList: [],
+      dialogVisible:false
+    };
+  },
+  computed: {},
+  //监控data中的数据变化
+  watch: {},
+  created() {},
+  mounted() {
+    this.initMap([{ lon: 97.85336, lat: 33.71632 }]);
+  },
+  methods: {
+    // 初始化地图
+    initMap(data) {
+      // 获取地图容器
+      this.mapDom = document.getElementById("map");
 
-        }
+      // 初始化地图配置
+      this.mapObj = new Map({
+        target: this.mapDom, // 地图容器
+        view: new View({
+          center: [parseFloat(data[0].lon), parseFloat(data[0].lat)], // 地图中心点
+          // center: [97.85336, 33.71632], // 地图中心点
+          zoom: 4, // 缩放
+          maxZoom: 11,
+          minZoom: 4,
+          projection: "EPSG:4326", // 坐标系
+        }),
+      });
+      this.mapObj.addControl(new ScaleLine());
+      // 添加一个使用离线瓦片地图的层
+      const offlineMapLayer = new TileLayer({
+        source: new XYZ({
+          // url: 'http://192.168.10.89' + '/courseware/tiles/10/124/5.jpg'
+          // url: 'http://192.168.20.21:8083/tiles/{z}/{x}/{y}.png' // 设置本地离线瓦片所在路径
+          // url: location.host+'/courseware/road/{z}/{x}/{y}.png' // 设置本地离线瓦片所在路径
+          url: "http://192.168.10.170:30808" + "/courseware/satellite/{z}/{x}/{y}.png", // 设置本地离线瓦片所在路径
+        }),
+      });
+      // // 将图层添加到地图
+      this.mapObj.addLayer(offlineMapLayer);
+      // 添加一个使用离线瓦片地图的层
+      const offlineMapLayer2 = new TileLayer({
+        source: new XYZ({
+          // url: 'http://192.168.10.89' + '/courseware/tiles/10/124/5.jpg'
+          // url: 'http://192.168.20.21:8084/tiles/{z}/{x}/{y}.png' // 设置本地离线瓦片所在路径
+          // url: location.host+'/courseware/satellite/{z}/{x}/{y}.png' // 设置本地离线瓦片所在路径
+          url: "http://192.168.10.170:30808" + "/courseware/road/{z}/{x}/{y}.png", // 设置本地离线瓦片所在路径
+        }),
+      });
+      // // 将图层添加到地图
+      this.mapObj.addLayer(offlineMapLayer2);
     },
-}
+  },
+};
 </script>
-<style lang='scss' scoped>
-.mapBOX {
-    height: 100%;
-    width: 100%;
+<style lang="scss" scoped>
+.map-data,
+#map {
+  width: 100%;
+  height: 100%;
 }
 </style>

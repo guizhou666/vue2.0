@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@antv/x6": "^2.13.1",
     "@bpmn-io/add-exporter": "^0.2.0",
     "@bpmn-io/element-template-chooser": "^0.0.5",
     "@bpmn-io/properties-panel": "^0.20.3",
@@ -27,6 +28,7 @@
     "diagram-js-minimap": "^2.1.1",
     "echarts": "^4.9.0",
     "element-ui": "^2.15.3",
+    "gojs": "^2.3.10",
     "highlight.js": "^10.5.0",
     "less-loader": "6.0.0",
     "lodash.debounce": "^4.0.8",

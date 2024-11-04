@@ -1,11 +1,15 @@
 <template>
   <div class="content">
-    <van-checkbox v-model="checked" @change="change(arguments,'haha')">复选框</van-checkbox>
-    <div class="box" @click="clickBox()">
-        <div class="buttom">
-            <button @click.prevent.self="clickButtom()">点击</button>
-        </div>
-    </div>
+    <el-table :data="tableData" style="width: 100%">
+      <el-table-column type="selection" width="55">
+      </el-table-column>
+      <el-table-column prop="date" label="日期" width="180"></el-table-column>
+      <el-table-column prop="name" label="姓名2" width="180"><template slot-scope="scope">
+          <div draggable @dragstart="handleDragStart($event, scope.row)" @dragover="handleDragOver($event)"
+            @drop="handleDrop($event, scope.row)">{{ scope.row.name }}
+          </div>
+        </template></el-table-column>
+      <el-table-column prop="address" label="地址"></el-table-column></el-table>
   </div>
 </template>
 
@@ -14,7 +18,13 @@ export default {
   components: {},
   data() {
     return {
-        checked:true
+      checked: true,
+      user: {
+        people: {
+          sex: 1
+        }
+      },
+      tableData: [{ name: '张三', address: 'xxxxxxxxxxxxxxxxx' }, { name: '李四', date: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' }, { name: '王五' }]
     };
   },
   computed: {},
@@ -23,36 +33,43 @@ export default {
   created() {
     console.log(this.$store)
   },
-  mounted() {},
+  mounted() { },
   methods: {
-    change(e,str){
-        console.log(e[0],str)
+    handleDragStart(event, row) {
+      this.draggingRowIndex = this.tableData.indexOf(row)
+      console.log(this.draggingRowIndex)
     },
-    clickBox(){
-        console.log('点击了外圈')
+    handleDragOver(event) {
+      event.preventDefault()
     },
-    clickButtom(){
-        console.log('点击了内圈')
+    handleDrop(event, row) {
+      const droppingRowIndex = this.tableData.indexOf(row)
+      console.log(droppingRowIndex)
+      const draggingRow = this.tableData[this.draggingRowIndex]
+      this.tableData.splice(this.draggingRowIndex, 1)
+      this.tableData.splice(droppingRowIndex, 0, draggingRow)
     }
   },
 };
 </script>
 <style lang="scss" scoped>
-    .content{
-        width: 100%;
-        .box{
-            width: 300px;
-            height: 400px;
-            background-color: aquamarine;
-            position: relative;
-            .buttom{
-                height: 80px;
-                width: 100%;
-                background-color: bisque;
-                position: absolute;
-                bottom: 10px;
-                left: 0;
-            }
-        }
+.content {
+  width: 100%;
+
+  .box {
+    width: 300px;
+    height: 400px;
+    background-color: aquamarine;
+    position: relative;
+
+    .buttom {
+      height: 80px;
+      width: 100%;
+      background-color: bisque;
+      position: absolute;
+      bottom: 10px;
+      left: 0;
     }
+  }
+}
 </style>

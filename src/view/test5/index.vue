@@ -1,53 +1,60 @@
 <template>
-  <div class="demo">
-    <li :id="'myVideo' + index" v-for="(item, index) in list" :key="index">
-      {{ item.name }}
-    </li>
+  <div class='test-five'>
+    <div class="box">测试哈哈哈哈</div>
+    <svg class="svg-picture" ref="svgPicture">
+      <line x1="0" y1="0" x2="200" y2="50" stroke="#02ca7f" />
+      <line x1="0" y1="0" x2="200" y2="50" stroke="red" />
+    </svg>
   </div>
 </template>
 
 <script>
+
 export default {
   components: {},
   data() {
     return {
-      list: [
-        { id: 0, name: "张三" },
-        { id: 1, name: "李四" },
-        { id: 2, name: "王五" },
-        { id: 3, name: "赵六" },
-        { id: 4, name: "马奇" },
-        { id: 5, name: "小六" },
-      ],
+
     };
   },
   computed: {},
   //监控data中的数据变化
   watch: {},
-  created() {},
+  created() {
+
+  },
   mounted() {
-    this.printDom();
+
   },
   methods: {
-    printDom() {
-      for (let index = 0; index < this.list.length; index++) {
-        var videoDom = document.getElementById("myVideo" + index);
-        console.log(videoDom)
-      }
-    },
+
   },
-};
+}
 </script>
-<style lang="scss" scoped>
-.demo {
-  width: 400px;
+<style lang='scss' scoped>
+.test-five {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
   border: 1px solid #cccccc;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  li {
-    border: 1px solid #333333;
+  position: relative;
+  background-color: blanchedalmond;
+
+  .box {
     width: 100px;
+    height: 100px;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    z-index: 999;
+    position: relative;
+    background-color: aquamarine;
+  }
+  .svg-picture{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
   }
 }
 </style>

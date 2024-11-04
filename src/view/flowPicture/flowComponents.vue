@@ -1,11 +1,11 @@
 <template>
   <div class='flow-picture' ref="flowPicture">
     <div class="left-content" ref="leftContent">
-      <div class="one-box">
+      <div class="one-box" :style="{ top: (newTreeData[0].childrenList.length > 6) ? '52px' : '' }">
         <img class="icon-img" src="../../assets/images/groupFour.png" alt="">
         <p>云端框架</p>
       </div>
-      <div class="short-line line"></div>
+      <div class="short-line line" :style="{ top: (newTreeData[0].childrenList.length > 6) ? '348px' : '' }"></div>
     </div>
     <div class="centre-content">
       <div class="centre-item" v-for="(item, index) in newTreeData" :key="index" :style="{ 'top': top(item, index) }">
@@ -18,7 +18,8 @@
           :style="{ 'height': height(item, index) }"></div>
       </div>
     </div>
-    <div class="right-content" ref="rightContent">
+    <div class="right-content" ref="rightContent"
+      :class="{ 'special-right-content': (newTreeData[0].childrenList.length > 6 && newTreeData.length === 1) }">
       <div v-for="(item, index) in newTreeData" :key="index">
         <div class="big-content" v-for="(v, index2) in item.childrenList" :key="index2">
           <div class="right-item" @click="clickDevice(index, index2)">
@@ -84,16 +85,31 @@ export default {
     top(item, index) {
       // 首位节点top特殊处理
       if (index == 0) {
-        if (item.childrenList.length < 4) {
-          this.$set(item, 'top', Number(item.childrenList.length / 2 * 100 - 40 + this.paddingTop));
-          return item.childrenList.length / 2 * 100 - 40 + this.paddingTop + 'px'
-        }// 第三层子数据超过三个父级top固定
-        else {
+        // if (item.childrenList.length < 4) {
+        //   console.log(Number(item.childrenList.length / 2 * 100 - 40 + this.paddingTop))
+        //   this.$set(item, 'top', Number(item.childrenList.length / 2 * 100 - 40 + this.paddingTop));
+        //   return item.childrenList.length / 2 * 100 - 40 + this.paddingTop + 'px'
+        // }// 第三层子数据超过三个父级top固定
+        // else {
+        //   this.$set(item, 'dreamTop', Number(item.childrenList.length / 2 * 100 - 40 + this.paddingTop))
+        //   this.$set(item, 'top', Number(100 - 40 + this.paddingTop))
+        //   return 100 - 40 + this.paddingTop + 'px'
+        // }
+        if (this.newTreeData.length > 1) {
+          if (item.childrenList.length === 1) {
+            this.$set(item, 'top', Number(item.childrenList.length / 2 * 100 - 40 + this.paddingTop));
+            return item.childrenList.length / 2 * 100 - 40 + this.paddingTop + 'px'
+          }
           this.$set(item, 'dreamTop', Number(item.childrenList.length / 2 * 100 - 40 + this.paddingTop))
           this.$set(item, 'top', Number(100 - 40 + this.paddingTop))
           return 100 - 40 + this.paddingTop + 'px'
+        } else {
+          console.log('-----1')
+          const newLength = (item.childrenList.length > 7) ? 7 : item.childrenList.length;
+          console.log(newLength)
+          this.$set(item, 'top', Number(newLength / 2 * 100 - 40 + this.paddingTop));
+          return newLength / 2 * 100 - 40 + this.paddingTop + 'px'
         }
-
       } else if (index == this.newTreeData.length - 1 && item.childrenList.length > 3) {
         this.$set(item, 'dreamTop', Number(item.id * 100 + 10 + this.paddingTop))
         this.$set(item, 'top', Number(this.childrenList.length * 100 - 140))
@@ -127,9 +143,9 @@ export default {
         moveDom.style.left = '765px';
         moveDom.style.transform = 'rotate(0deg)';
         if (index == 0) {
-          moveDom.style.top = (this.treeData[index].id + index2 - 1) * 100 + 25 + this.paddingTop + 'px'
+          moveDom.style.top = (this.newTreeData[index].id + index2 - 1) * 100 + 25 + this.paddingTop + 'px'
         } else {
-          moveDom.style.top = (this.treeData[index].id + index2) * 100 + 25 + this.paddingTop + 'px'
+          moveDom.style.top = (this.newTreeData[index].id + index2) * 100 + 25 + this.paddingTop + 'px'
         }
         this.timerout = setTimeout(() => {
           moveDom.style.left = '725px';
@@ -137,8 +153,8 @@ export default {
 
         this.timerout2 = setTimeout(() => {
           moveDom.style.left = '676px';
-          if (this.treeData[index].top != moveDom.offsetTop - 15) {
-            if (this.treeData[index].top < moveDom.offsetTop) {
+          if (this.newTreeData[index].top != moveDom.offsetTop - 15.5) {
+            if (this.newTreeData[index].top < moveDom.offsetTop) {
               moveDom.style.transform = 'rotate(90deg)';
             } else {
               moveDom.style.transform = 'rotate(-90deg)';
@@ -147,7 +163,9 @@ export default {
           this.timer = setInterval(() => {
             if (this.treeData[index].top < (moveDom.offsetTop - 40)) {
               moveDom.style.top = moveDom.offsetTop - 50 + 'px';
-            } else if (this.treeData[index].top == moveDom.offsetTop - 15) {
+              console.log(this.treeData[index].top)
+              console.log(moveDom.offsetTop)
+            } else if (this.treeData[index].top == moveDom.offsetTop - 15.5) {
               moveDom.style.left = '626px';
               moveDom.style.transform = 'rotate(0deg)';
               this.timerout3 = setTimeout(() => {
@@ -155,7 +173,7 @@ export default {
                 this.timerout4 = setTimeout(() => {
                   moveDom.style.left = '214px';
                   const scrollTop = this.$refs.flowPicture.scrollTop;
-                  moveDom.style.top = 274 + scrollTop + 'px';
+                  moveDom.style.top = 307 + scrollTop + 'px';
                   this.timerout5 = setTimeout(() => {
                     this.clickDevice(index, index2);
                   }, 500);
@@ -171,7 +189,7 @@ export default {
           }, 500);
         }, 1000);
       })
-    }
+    },
   },
 }
 </script>
@@ -307,6 +325,11 @@ export default {
         top: 39px;
       }
     }
+  }
+
+  .special-right-content {
+    overflow: auto;
+    width: calc(100% - 700px);
   }
 
   .line {

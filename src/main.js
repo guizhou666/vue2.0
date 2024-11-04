@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import 'vue-area-linkage/dist/index.css'; // v2 or higher
-import VCharts from 'v-charts'
+// import VCharts from 'v-charts'
 import echarts from 'echarts'
 import Distpicker from 'v-distpicker'
 import ElementUI from 'element-ui';
@@ -21,7 +21,7 @@ import dataV from '@jiaminghi/data-view'
 
 Vue.use(dataV)
 Vue.component('v-distpicker', Distpicker);
-Vue.use(VCharts);
+// Vue.use(VCharts);
 Vue.use(ElementUI, {
     size: "small"
 });
@@ -30,7 +30,7 @@ import {
     Icon
 } from 'vant';
 Vue.use(Icon);
-
+import '@/styles/index.scss' // 全局样式
 
 // npmb 流程图
 import {
@@ -43,6 +43,10 @@ Vue.directive("r-popover", ResetPopover);
 import Common from "@/packages/components/common";
 Vue.use(Common);
 import "./packages/theme/index.scss";
+
+
+import gojs from 'gojs' // 在 main.js 中引入
+Vue.prototype.go = gojs // 挂载
 
 Vue.prototype.$echarts = echarts
 Vue.prototype.$http = axios;
